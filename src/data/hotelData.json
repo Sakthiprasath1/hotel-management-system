@@ -1,0 +1,51 @@
+{
+  "halls": [
+    {
+      "id": "1",
+      "hallNo": "H-101",
+      "name": "Grand Ballroom",
+      "type": "Suite",
+      "capacity": 500,
+      "amenities": ["AC", "Projector", "Sound System", "Stage"],
+      "status": "Available",
+      "price": 20000
+    },
+    {
+      "id": "2",
+      "hallNo": "H-102",
+      "name": "Ocean View Hall",
+      "type": "Deluxe",
+      "capacity": 200,
+      "amenities": ["AC", "Sound System", "Wifi"],
+      "status": "Occupied",
+      "price": 12000
+    },
+    {
+      "id": "3",
+      "hallNo": "H-103",
+      "name": "Meeting Room A",
+      "type": "Standard",
+      "capacity": 50,
+      "amenities": ["AC", "Wifi"],
+      "status": "Maintenance",
+      "price": 8000
+    }
+  ],
+  "reservations": [],
+  "staff": [
+    {
+      "id": "1",
+      "name": "AMMU",
+      "role": "Receptionist",
+      "shift": "Morning",
+      "status": "Active"
+    },
+    {
+      "id": "2",
+      "name": "HARI",
+      "role": "Housekeeping",
+      "shift": "Evening",
+      "status": "Active"
+    }
+  ]
+}

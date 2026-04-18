@@ -1,0 +1,30 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { CreditCard, ArrowUpRight, ArrowDownRight, Search, Clock } from 'lucide-react';
+export default function PaymentManagement() {
+    const { payments, reservations, halls, setPayments, setReservations } = useAuth();
+    const [searchTerm, setSearchTerm] = useState('');
+    const totalPayments = payments.reduce((acc, p) => acc + p.amount, 0);
+    const pendingPayments = reservations.filter(r => r.paymentStatus === 'Pending').reduce((acc, r) => acc + r.amount, 0);
+    const refundCount = payments.filter(p => p.status === 'Refunded').length;
+    const handleProcessRefund = async (paymentId) => {
+        if (!window.confirm("Confirm refund for this payment?"))
+            return;
+        try {
+            const res = await fetch(`http://localhost:5001/payments/${paymentId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: 'Refunded' })
+            });
+            if (res.ok) {
+                setPayments(payments.map(p => p.id === paymentId ? { ...p, status: 'Refunded' } : p));
+                alert("Refund processed successfully.");
+            }
+        }
+        catch (e) {
+            alert("Failed to process refund.");
+        }
+    };
+    return (_jsxs("div", { children: [_jsxs("div", { className: "page-header", children: [_jsx("h1", { className: "page-title", children: "Financial & Payment Oversight" }), _jsxs("div", { style: { display: 'flex', gap: '12px' }, children: [_jsx("button", { className: "btn-secondary", children: "Download Statement" }), _jsx("button", { className: "btn", children: "Add Transaction" })] })] }), _jsxs("div", { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px', marginBottom: '32px' }, children: [_jsxs("div", { className: "card glass-card", style: { borderLeft: '4px solid #27ae60' }, children: [_jsxs("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }, children: [_jsx("span", { style: { color: 'var(--text-muted)', fontSize: '0.9rem' }, children: "Net Revenue" }), _jsx(ArrowUpRight, { size: 20, color: "#27ae60" })] }), _jsxs("p", { style: { fontSize: '2rem', fontWeight: 800 }, children: ["\u20B9", totalPayments.toLocaleString()] }), _jsx("p", { style: { fontSize: '0.8rem', color: '#27ae60', marginTop: '4px' }, children: "+12.5% from last month" })] }), _jsxs("div", { className: "card glass-card", style: { borderLeft: '4px solid #f39c12' }, children: [_jsxs("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }, children: [_jsx("span", { style: { color: 'var(--text-muted)', fontSize: '0.9rem' }, children: "Pending Receivables" }), _jsx(Clock, { size: 20, color: "#f39c12" })] }), _jsxs("p", { style: { fontSize: '2rem', fontWeight: 800 }, children: ["\u20B9", pendingPayments.toLocaleString()] }), _jsx("p", { style: { fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }, children: "14 outstanding bookings" })] }), _jsxs("div", { className: "card glass-card", style: { borderLeft: '4px solid #e74c3c' }, children: [_jsxs("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }, children: [_jsx("span", { style: { color: 'var(--text-muted)', fontSize: '0.9rem' }, children: "Total Refunds" }), _jsx(ArrowDownRight, { size: 20, color: "#e74c3c" })] }), _jsx("p", { style: { fontSize: '2rem', fontWeight: 800 }, children: refundCount }), _jsx("p", { style: { fontSize: '0.8rem', color: '#e74c3c', marginTop: '4px' }, children: "Across 3 hall types" })] })] }), _jsxs("div", { className: "card glass-card", style: { padding: 0 }, children: [_jsxs("div", { style: { padding: '20px', borderBottom: '1px solid #ddd', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }, children: [_jsx("h3", { children: "Transaction History" }), _jsxs("div", { style: { display: 'flex', gap: '8px', alignItems: 'center', background: '#f5f5f5', padding: '8px 16px', borderRadius: '8px' }, children: [_jsx(Search, { size: 18, color: "#666" }), _jsx("input", { style: { border: 'none', background: 'transparent', width: '250px' }, placeholder: "Search by ID or Guest...", value: searchTerm, onChange: e => setSearchTerm(e.target.value) })] })] }), _jsxs("table", { children: [_jsx("thead", { children: _jsxs("tr", { children: [_jsx("th", { children: "Invoice ID" }), _jsx("th", { children: "Transaction Date" }), _jsx("th", { children: "Amount" }), _jsx("th", { children: "Method" }), _jsx("th", { children: "Status" }), _jsx("th", { children: "Actions" })] }) }), _jsxs("tbody", { children: [payments.map(p => (_jsxs("tr", { children: [_jsxs("td", { style: { fontWeight: 600 }, children: ["#", p.id] }), _jsx("td", { style: { color: 'var(--text-muted)' }, children: new Date(p.createdAt).toLocaleDateString() }), _jsxs("td", { style: { fontWeight: 700 }, children: ["\u20B9", p.amount.toLocaleString()] }), _jsx("td", { children: _jsxs("div", { style: { display: 'flex', alignItems: 'center', gap: '6px' }, children: [_jsx(CreditCard, { size: 14 }), " ", p.method] }) }), _jsx("td", { children: _jsx("span", { className: `status-badge ${p.status.toLowerCase()}`, children: p.status }) }), _jsxs("td", { children: [p.status === 'Completed' && (_jsx("button", { className: "btn-secondary btn-danger", style: { padding: '4px 8px', fontSize: '0.8rem' }, onClick: () => handleProcessRefund(p.id), children: "Issue Refund" })), p.status === 'Refunded' && _jsx("span", { style: { fontSize: '0.8rem', color: 'var(--text-muted)' }, children: "Processed" })] })] }, p.id))), payments.length === 0 && (_jsx("tr", { children: _jsx("td", { colSpan: 6, style: { textAlign: 'center', padding: '40px' }, children: "No transactions recorded." }) }))] })] })] })] }));
+}

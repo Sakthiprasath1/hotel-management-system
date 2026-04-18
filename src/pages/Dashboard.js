@@ -1,0 +1,12 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useAuth } from '../context/AuthContext';
+export default function Dashboard() {
+    const { halls, reservations, payments } = useAuth();
+    const totalHalls = halls.length;
+    const occupiedHalls = halls.filter(h => h.status === 'Occupied').length;
+    const availableHalls = halls.filter(h => h.status === 'Available').length;
+    const activeBookings = reservations.length;
+    const occupancyRate = totalHalls > 0 ? Math.round((occupiedHalls / totalHalls) * 100) : 0;
+    const totalRevenue = payments.reduce((acc, p) => acc + p.amount, 0);
+    return (_jsxs("div", { children: [_jsx("div", { className: "page-header", children: _jsx("h1", { className: "page-title", children: "Management Dashboard" }) }), _jsxs("div", { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px', marginBottom: '24px' }, children: [_jsxs("div", { className: "card glass-card", children: [_jsx("h3", { style: { color: 'var(--text-muted)', fontSize: '0.9rem' }, children: "Occupancy Rate" }), _jsxs("p", { style: { fontSize: '2rem', fontWeight: 600 }, children: [occupancyRate, "%"] })] }), _jsxs("div", { className: "card glass-card", children: [_jsx("h3", { style: { color: 'var(--text-muted)', fontSize: '0.9rem' }, children: "Available Halls" }), _jsx("p", { style: { fontSize: '2rem', fontWeight: 600 }, children: availableHalls })] }), _jsxs("div", { className: "card glass-card", children: [_jsx("h3", { style: { color: 'var(--text-muted)', fontSize: '0.9rem' }, children: "Total Bookings" }), _jsx("p", { style: { fontSize: '2rem', fontWeight: 600 }, children: activeBookings })] }), _jsxs("div", { className: "card glass-card", children: [_jsx("h3", { style: { color: 'var(--text-muted)', fontSize: '0.9rem' }, children: "Total Revenue" }), _jsxs("p", { style: { fontSize: '1.8rem', fontWeight: 600, color: 'var(--primary)' }, children: ["\u20B9", totalRevenue.toLocaleString()] })] })] }), _jsxs("div", { className: "card glass-card", children: [_jsx("h3", { children: "Recent Hall Activity" }), _jsx("div", { style: { marginTop: '16px' }, children: halls.slice(0, 5).map(hall => (_jsxs("div", { style: { display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--border-color)' }, children: [_jsxs("span", { children: [hall.name, " (", hall.hallNo, ")"] }), _jsx("span", { className: `status-badge ${hall.status.toLowerCase()}`, children: hall.status })] }, hall.id))) })] })] }));
+}

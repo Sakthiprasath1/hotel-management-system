@@ -1,0 +1,342 @@
+{
+  "users": [
+    {
+      "id": "a5HYPC84eY0",
+      "name": "SAKTHI (Admin)",
+      "email": "vibe@gmail.com",
+      "password": "123456",
+      "role": "admin",
+      "phone": "9876543210"
+    },
+    {
+      "id": "recTESTid123",
+      "name": "ALICE (Receptionist)",
+      "email": "receptionist@vibe.com",
+      "password": "1234",
+      "role": "receptionist",
+      "phone": "9876543219"
+    },
+    {
+      "id": "KVCBE2lUifA",
+      "name": "GURU (Guest)",
+      "email": "super@gmail.com",
+      "password": "super",
+      "role": "guest",
+      "phone": "9876543211"
+    },
+    {
+      "id": "4eaWeHt5IBI",
+      "name": "AMMU",
+      "email": "super1@gmail.com",
+      "password": "1234",
+      "role": "guest",
+      "phone": "9876543212"
+    },
+    {
+      "name": "sakthi prasath",
+      "email": "sakthinewww@gmail.com",
+      "password": "1234",
+      "role": "guest",
+      "phone": "6380905543",
+      "id": "ujCfz1WJ-BU"
+    },
+    {
+      "name": "hari",
+      "email": "hari@gmail.com",
+      "password": "321",
+      "role": "guest",
+      "phone": "06380905543",
+      "id": "aDBmM_smjLc"
+    },
+    {
+      "name": "lik",
+      "email": "lik@123",
+      "password": "123",
+      "role": "guest",
+      "phone": "6380905543",
+      "id": "nHZF1CZ5UZg"
+    },
+    {
+      "name": "kok",
+      "email": "kok@gmail.com",
+      "password": "321",
+      "role": "guest",
+      "phone": "06380905543",
+      "id": "920preA8n2k"
+    }
+  ],
+  "rooms": [
+    {
+      "roomNo": "R-101",
+      "name": "Standard Comfort",
+      "type": "Standard",
+      "status": "Available",
+      "price": 3500,
+      "capacity": 2,
+      "amenities": [
+        "AC",
+        "Wifi",
+        "Work Desk"
+      ],
+      "image": "/assets/rooms/room_standard.png",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "roomNo": "R-102",
+      "name": "Standard Twin",
+      "type": "Standard",
+      "capacity": 2,
+      "amenities": [
+        "AC",
+        "Wifi",
+        "TV"
+      ],
+      "status": "Available",
+      "price": 3800,
+      "image": "/assets/rooms/room_standard.png"
+    },
+    {
+      "id": "3",
+      "roomNo": "R-201",
+      "name": "Deluxe Garden View",
+      "type": "Deluxe",
+      "capacity": 2,
+      "amenities": [
+        "AC",
+        "Wifi",
+        "Mini Bar",
+        "Garden View"
+      ],
+      "status": "Available",
+      "price": 5500,
+      "image": "/assets/rooms/room_deluxe.png"
+    },
+    {
+      "id": "4",
+      "roomNo": "R-202",
+      "name": "Deluxe Ocean Breeze",
+      "type": "Deluxe",
+      "capacity": 3,
+      "amenities": [
+        "AC",
+        "Wifi",
+        "Balcony",
+        "Coffee Maker"
+      ],
+      "status": "Occupied",
+      "price": 6200,
+      "image": "/assets/rooms/room_deluxe.png"
+    },
+    {
+      "id": "5",
+      "roomNo": "R-301",
+      "name": "Executive Business Suite",
+      "type": "Executive",
+      "capacity": 2,
+      "amenities": [
+        "AC",
+        "Wifi",
+        "Prime Desk",
+        "Lounge Access"
+      ],
+      "status": "Available",
+      "price": 8500,
+      "image": "/assets/rooms/room_executive.png"
+    },
+    {
+      "id": "6",
+      "roomNo": "R-302",
+      "name": "Executive Family Suite",
+      "type": "Executive",
+      "capacity": 4,
+      "amenities": [
+        "AC",
+        "Wifi",
+        "Living Area",
+        "Kitchenette"
+      ],
+      "status": "Available",
+      "price": 10500,
+      "image": "/assets/rooms/room_executive.png"
+    },
+    {
+      "id": "7",
+      "roomNo": "R-401",
+      "name": "Royal Crown Suite",
+      "type": "Royal",
+      "capacity": 2,
+      "amenities": [
+        "AC",
+        "Wifi",
+        "Private Balcony",
+        "Jacuzzi"
+      ],
+      "status": "Available",
+      "price": 18000,
+      "image": "/assets/rooms/room_royal.png"
+    },
+    {
+      "id": "8",
+      "roomNo": "R-402",
+      "name": "Presidential Royal Wing",
+      "type": "Royal",
+      "capacity": 4,
+      "amenities": [
+        "AC",
+        "Wifi",
+        "Private Chef",
+        "Butler Service"
+      ],
+      "status": "Maintenance",
+      "price": 25000,
+      "image": "/assets/rooms/room_royal.png"
+    },
+    {
+      "roomNo": "234",
+      "name": "dfgn",
+      "type": "Executive",
+      "status": "Available",
+      "price": 4567,
+      "capacity": 3,
+      "amenities": [
+        "Wifi",
+        "AC"
+      ],
+      "image": "/assets/rooms/room_standard.png",
+      "id": "9iw9sxUN1-g"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "ulIzZmILLSo",
+      "userId": "guest-1776166371090",
+      "guestName": "Guest User",
+      "dates": "aug 20-aug-21",
+      "roomId": "1",
+      "roomName": "Standard Comfort",
+      "status": "Confirmed",
+      "amount": 4000,
+      "paymentStatus": "Paid"
+    },
+    {
+      "id": "QkId7AqEKVs",
+      "userId": "ujCfz1WJ-BU",
+      "guestName": "sakthi prasath",
+      "dates": "3235 ",
+      "roomId": "1",
+      "roomName": "Standard Comfort",
+      "status": "Cancelled",
+      "amount": 4000,
+      "paymentStatus": "Refunded"
+    },
+    {
+      "id": "gCeyP1y3440",
+      "userId": "guest-1776232202166",
+      "guestName": "lik@123",
+      "dates": "34567",
+      "roomId": "3",
+      "roomName": "Deluxe Garden View",
+      "status": "Cancelled",
+      "amount": 6000,
+      "paymentStatus": "Refunded"
+    },
+    {
+      "id": "WFHfuMD991A",
+      "userId": "guest-1776242021377",
+      "guestName": "img",
+      "dates": "q5678980-",
+      "roomId": "1",
+      "roomName": "Standard Comfort",
+      "status": "Confirmed",
+      "amount": 4000,
+      "paymentStatus": "Paid"
+    },
+    {
+      "id": "TH5Mp4_CGTY",
+      "userId": "guest-1776492918636",
+      "guestName": "hi",
+      "dates": "q23134",
+      "roomId": "1",
+      "roomName": "Standard Comfort",
+      "status": "Cancelled",
+      "amount": 4000,
+      "paymentStatus": "Refunded"
+    }
+  ],
+  "payments": [],
+  "notifications": [],
+  "staff": [
+    {
+      "name": "AMMJU",
+      "role": "Receptionist",
+      "shift": "Morning",
+      "status": "Active",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "name": "HARI",
+      "role": "Housekeeping",
+      "shift": "Evening",
+      "status": "Active"
+    }
+  ],
+  "serviceRequests": [
+    {
+      "id": "XDwAVQ7Lh8U",
+      "userId": "guest-1776166371090",
+      "guestName": "Guest User",
+      "roomNo": "u1332",
+      "type": "Housekeeping",
+      "status": "Pending",
+      "createdAt": "2026-04-14T11:34:48.356Z"
+    },
+    {
+      "id": "JjuCDWh3mkg",
+      "userId": "ujCfz1WJ-BU",
+      "guestName": "sakthi prasath",
+      "roomNo": "456",
+      "type": "Room Service",
+      "status": "Pending",
+      "createdAt": "2026-04-14T11:39:07.211Z"
+    },
+    {
+      "id": "1tjyWd7NNbY",
+      "userId": "ujCfz1WJ-BU",
+      "guestName": "sakthi prasath",
+      "roomNo": "546",
+      "type": "Housekeeping",
+      "status": "Pending",
+      "createdAt": "2026-04-14T11:52:22.643Z"
+    },
+    {
+      "id": "6d7cfHpLL4s",
+      "userId": "guest-1776232202166",
+      "guestName": "lik@123",
+      "roomNo": "`1231`23",
+      "type": "Housekeeping",
+      "status": "Pending",
+      "createdAt": "2026-04-15T08:22:56.057Z"
+    },
+    {
+      "id": "FeayaFDAKKc",
+      "userId": "guest-1776243853679",
+      "guestName": "4",
+      "roomNo": "i need tea",
+      "type": "Room Service",
+      "status": "Pending",
+      "createdAt": "2026-04-15T09:10:30.459Z"
+    },
+    {
+      "id": "t6wZA6CRoVA",
+      "userId": "guest-1776492918636",
+      "guestName": "hi",
+      "roomNo": "dsa",
+      "type": "Room Service",
+      "status": "Pending",
+      "createdAt": "2026-04-18T06:17:06.513Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

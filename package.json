@@ -1,0 +1,31 @@
+{
+  "name": "new-folder--3-",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "esbuild src/main.tsx --bundle --outfile=public/bundle.js --watch --servedir=public --sourcemap --loader:.tsx=tsx --loader:.ts=ts --loader:.css=css --loader:.png=dataurl --loader:.jpg=dataurl",
+    "server": "json-server db.json --port 5001",
+    "build": "tsc && esbuild src/main.tsx --bundle --minify --outfile=public/bundle.js --loader:.tsx=tsx --loader:.ts=ts --loader:.css=css --loader:.png=dataurl --loader:.jpg=dataurl"
+  },
+  "dependencies": {
+    "lucide-react": "^1.8.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.14.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^24.12.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "esbuild": "^0.28.0",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^17.4.0",
+    "json-server": "^1.0.0-beta.15",
+    "serve": "^14.2.6",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.0"
+  }
+}
