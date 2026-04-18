@@ -15,17 +15,9 @@ export default function MyBookings() {
     if (!window.confirm("Are you sure you want to cancel this booking? Cancellation policies may apply.")) return;
 
     try {
-      const baseUrl = `http://${window.location.hostname}:5001`;
-      const res = await fetch(`${baseUrl}/reservations/${resId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: 'Cancelled', paymentStatus: 'Refunded' })
-      });
-      if (res.ok) {
-        const updated = await res.json();
-        setReservations(reservations.map(r => r.id === resId ? updated : r));
-        alert("Booking cancelled successfully.");
-      }
+      // Update local state instead of fetch
+      setReservations(reservations.map(r => r.id === resId ? { ...r, status: 'Cancelled', paymentStatus: 'Refunded' } : r));
+      alert("Booking cancelled successfully.");
     } catch (e) {
       alert("Failed to cancel booking.");
     }

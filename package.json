@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "dev": "esbuild src/main.tsx --bundle --outfile=public/bundle.js --watch --servedir=public --sourcemap --loader:.tsx=tsx --loader:.ts=ts --loader:.css=css --loader:.png=dataurl --loader:.jpg=dataurl",
-    "server": "json-server db.json --port 5001",
     "build": "tsc && esbuild src/main.tsx --bundle --minify --outfile=public/bundle.js --loader:.tsx=tsx --loader:.ts=ts --loader:.css=css --loader:.png=dataurl --loader:.jpg=dataurl"
   },
   "dependencies": {

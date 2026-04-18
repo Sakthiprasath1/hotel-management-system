@@ -10,13 +10,13 @@ export default function Signup() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, users, setUsers } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    const trimmedEmail = email.trim();
+    const trimmedEmail = email.trim().toLowerCase();
     const trimmedPassword = password.trim();
 
     if (password !== confirmPassword) {
@@ -26,40 +26,31 @@ export default function Signup() {
     }
 
     try {
-      const baseUrl = `http://${window.location.hostname}:5001`;
-      const checkRes = await fetch(`${baseUrl}/users?email=${encodeURIComponent(trimmedEmail)}`);
-      const existingData = await checkRes.json();
+      // Check for duplicates in local state
+      const existingUser = users.find(u => u.email.toLowerCase() === trimmedEmail);
 
-      if (existingData.length > 0) {
+      if (existingUser) {
         alert("Account with this email already exists!");
         setIsLoading(false);
         return;
       }
 
-      const newUser = { 
+      const createdUser = { 
+        id: Math.random().toString(36).substr(2, 9),
         name, 
         email: trimmedEmail, 
         password: trimmedPassword, 
-        role: 'guest', 
+        role: 'guest' as const, 
         phone 
       };
 
-      const res = await fetch(`${baseUrl}/users`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newUser)
-      });
-
-      if (res.ok) {
-        const createdUser = await res.json();
-        login(createdUser);
-        navigate('/');
-      } else {
-        throw new Error('Failed to create account');
-      }
+      // Update local state instead of fetch
+      setUsers([...users, createdUser]);
+      login(createdUser);
+      navigate('/');
     } catch (error) {
       console.error("Signup error:", error);
-      alert("Registration failed. Make sure the server is running on port 5001.");
+      alert("Registration failed.");
     } finally {
       setIsLoading(false);
     }

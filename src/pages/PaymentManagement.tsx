@@ -14,16 +14,9 @@ export default function PaymentManagement() {
     if (!window.confirm("Confirm refund for this payment?")) return;
 
     try {
-      const baseUrl = `http://${window.location.hostname}:5001`;
-      const res = await fetch(`${baseUrl}/payments/${paymentId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: 'Refunded' })
-      });
-      if (res.ok) {
-        setPayments(payments.map(p => p.id === paymentId ? { ...p, status: 'Refunded' } : p));
-        alert("Refund processed successfully.");
-      }
+      // Update local state instead of fetch
+      setPayments(payments.map(p => p.id === paymentId ? { ...p, status: 'Refunded' } : p));
+      alert("Refund processed successfully.");
     } catch (e) {
       alert("Failed to process refund.");
     }

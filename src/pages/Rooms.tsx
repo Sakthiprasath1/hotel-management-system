@@ -44,36 +44,25 @@ export default function Rooms() {
       image: editingRoom?.image || "/assets/rooms/room_standard.png"
     };
     
-    const baseUrl = `http://${window.location.hostname}:5001`;
     try {
       if (editingRoom) {
-        const res = await fetch(`${baseUrl}/rooms/${editingRoom.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(roomData)
-        });
-        const updatedRoom = await res.json();
+        // Update local state instead of fetch
+        const updatedRoom = { ...roomData, id: editingRoom.id };
         setRooms(rooms.map(r => r.id === editingRoom.id ? updatedRoom : r));
       } else {
-        const res = await fetch(`${baseUrl}/rooms`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(roomData)
-        });
-        const newRoom = await res.json();
+        // Add new room with unique ID
+        const newRoom = { ...roomData, id: Math.random().toString(36).substr(2, 9) };
         setRooms([...rooms, newRoom]);
       }
       setIsModalOpen(false);
     } catch (error) {
-      alert("Failed to save room. Check server.");
+      alert("Failed to save room.");
     }
   };
 
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this room?')) {
-      const baseUrl = `http://${window.location.hostname}:5001`;
       try {
-        await fetch(`${baseUrl}/rooms/${id}`, { method: 'DELETE' });
         setRooms(rooms.filter(r => r.id !== id));
       } catch (error) {
         alert("Failed to delete room.");

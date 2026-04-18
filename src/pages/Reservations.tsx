@@ -43,41 +43,29 @@ export default function Reservations() {
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    const baseUrl = `http://${window.location.hostname}:5001`;
     try {
       if (editingReservation) {
-        const res = await fetch(`${baseUrl}/reservations/${editingReservation.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...editingReservation, ...formData })
-        });
-        const updatedRes = await res.json();
+        // Update local state instead of fetch
+        const updatedRes = { ...editingReservation, ...formData };
         setReservations(reservations.map(r => r.id === editingReservation.id ? updatedRes : r));
       } else {
+        // Add new reservation with unique ID
         const newResData = {
           id: 'RES-' + Math.floor(Math.random() * 10000),
           userId: 'KVCBE2lUifA', // Default to a guest for manual admin adds
           ...formData
         };
-        const res = await fetch(`${baseUrl}/reservations`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newResData)
-        });
-        const savedRes = await res.json();
-        setReservations([...reservations, savedRes]);
+        setReservations([...reservations, newResData]);
       }
       setIsModalOpen(false);
     } catch (error) {
-      alert("Failed to save booking. Check server.");
+      alert("Failed to save booking.");
     }
   };
 
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to cancel this booking?')) {
-      const baseUrl = `http://${window.location.hostname}:5001`;
       try {
-        await fetch(`${baseUrl}/reservations/${id}`, { method: 'DELETE' });
         setReservations(reservations.filter(r => r.id !== id));
       } catch (error) {
         alert("Failed to cancel booking.");
@@ -86,17 +74,9 @@ export default function Reservations() {
   };
 
   const handleStatusChange = async (res: Reservation, newStatus: string) => {
-    const baseUrl = `http://${window.location.hostname}:5001`;
     try {
-      const resp = await fetch(`${baseUrl}/reservations/${res.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: newStatus })
-      });
-      if (resp.ok) {
-        const updated = await resp.json();
-        setReservations(reservations.map(r => r.id === res.id ? updated : r));
-      }
+      const updated = { ...res, status: newStatus };
+      setReservations(reservations.map(r => r.id === res.id ? updated : r));
     } catch (e) {
       alert("Failed to update status.");
     }

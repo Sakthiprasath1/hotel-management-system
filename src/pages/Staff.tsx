@@ -27,36 +27,23 @@ export default function Staff() {
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    const baseUrl = `http://${window.location.hostname}:5001`;
     try {
       if (editingStaff) {
-        const res = await fetch(`${baseUrl}/staff/${editingStaff.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
-        const updatedStaff = await res.json();
+        const updatedStaff = { ...formData, id: editingStaff.id };
         setStaff(staff.map(s => s.id === editingStaff.id ? updatedStaff : s));
       } else {
-        const res = await fetch(`${baseUrl}/staff`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
-        const newStaff = await res.json();
+        const newStaff = { ...formData, id: Math.random().toString(36).substr(2, 9) };
         setStaff([...staff, newStaff]);
       }
       setIsModalOpen(false);
     } catch (error) {
-      alert("Failed to save staff member. Check server.");
+      alert("Failed to save staff member.");
     }
   };
 
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to remove this staff member?')) {
-      const baseUrl = `http://${window.location.hostname}:5001`;
       try {
-        await fetch(`${baseUrl}/staff/${id}`, { method: 'DELETE' });
         setStaff(staff.filter(s => s.id !== id));
       } catch (error) {
         alert("Failed to remove staff member.");

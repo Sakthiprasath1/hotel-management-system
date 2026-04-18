@@ -43,22 +43,14 @@ export default function Payment() {
     };
 
     try {
-      const baseUrl = `http://${window.location.hostname}:5001`;
-      const res = await fetch(`${baseUrl}/reservations`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newReservation)
-      });
-      
-      if (res.ok) {
-        setReservations([...reservations, await res.json()]);
-        // Simulate processing time
-        setTimeout(() => {
-          setIsProcessing(false);
-          alert("Payment Successful! Your room is booked.");
-          navigate('/my-bookings');
-        }, 1500);
-      }
+      // Update local state instead of fetch
+      setReservations([...reservations, newReservation]);
+      // Simulate processing time
+      setTimeout(() => {
+        setIsProcessing(false);
+        alert("Payment Successful! Your room is booked.");
+        navigate('/my-bookings');
+      }, 1500);
     } catch (e) {
       alert("Payment failed. Please try again.");
       setIsProcessing(false);

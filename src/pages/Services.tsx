@@ -27,18 +27,10 @@ export default function Services() {
     };
 
     try {
-      const baseUrl = `http://${window.location.hostname}:5001`;
-      const res = await fetch(`${baseUrl}/serviceRequests`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newReq)
-      });
-      if (res.ok) {
-        const savedReq = await res.json();
-        setServiceRequests([...serviceRequests, savedReq]);
-        alert("Request submitted successfully!");
-        setFormData({ ...formData, type: 'Housekeeping' });
-      }
+      // Update local state instead of fetch
+      setServiceRequests([...serviceRequests, newReq]);
+      alert("Request submitted successfully!");
+      setFormData({ ...formData, type: 'Housekeeping' });
     } catch (err) {
       alert("Failed to submit request.");
     }
